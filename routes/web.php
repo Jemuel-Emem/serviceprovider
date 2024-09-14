@@ -54,6 +54,10 @@ Route::middleware([
             return view('client.index');
         })->name('client-dashboard');
 
+        Route::get('/services', function(){
+            return view('client.services');
+        })->name('servi');
+
 
      });
 
@@ -70,6 +74,10 @@ Route::middleware([
         Route::get('/serviceoffered', function(){
             return view('serviceprovider.service-offered');
         })->name('service-off');
+
+        Route::get('/profile', function(){
+            return view('serviceprovider.profile');
+        })->name('prof');
 
      });
 

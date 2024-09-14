@@ -82,7 +82,7 @@
                         <a href="{{ route('client-dashboard') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Home</a>
                     </li>
                     <li>
-                        <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">Services</a>
+                        <a href="{{ route('servi') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Services</a>
                     </li>
                     <li>
                         <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>

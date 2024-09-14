@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('role')->default(0);
+            $table->string('gcashname')->nullable();
+            $table->string('gcashnumber')->nullable();
+            $table->string('id_photo')->nullable();
             $table->string('serviceproviderstatus')->default('approving');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

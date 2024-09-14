@@ -34,7 +34,7 @@ new #[Layout('layouts.guest')] class extends Component
         $validated['password'] = Hash::make($validated['password']);
 
         // Assign numeric value for role (e.g., 2 for Service Provider, 1 for Client)
-        $validated['role'] = $this->role === 'service_provider' ? 2 : 1;
+        $validated['role'] = $this->role === 'service_provider' ? 2 : 0;
 
         // Create a new user with the validated data
         event(new Registered($user = User::create($validated)));

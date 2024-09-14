@@ -56,6 +56,12 @@
         .nav-logo {
             color: #3B82F6;
         }
+
+        .disabled-link {
+            pointer-events: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     </style>
 @wireUiScripts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -82,13 +88,17 @@
                         <a href="{{ route('client-dashboard') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Home</a>
                     </li>
                     <li>
-                        <a href="{{ route('service-off') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Services Offer</a>
+                        <a href="{{ route('service-off') }}" class="{{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Services Offer</a>
                     </li>
                     <li>
-                        <a href="{{ route('app') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>
+                        <a href="{{ route('app') }}" class="{{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>
                     </li>
                     <li>
-                        <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">Message</a>
+                        <a href="" class=" {{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Message</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('prof') }}" class=" block py-2 px-3 text-white uppercase font-bold">Profile</a>
                     </li>
 
                     <li>
@@ -117,7 +127,6 @@
             @endif
         </main>
     </div>
-
 
     @livewireScripts
 </body>

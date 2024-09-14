@@ -21,7 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'gcashname',
+        'gcashnumber',
+        'id_photo'
     ];
 
     /**
