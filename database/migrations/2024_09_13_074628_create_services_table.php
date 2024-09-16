@@ -17,6 +17,8 @@ return new class extends Migration
     $table->string('service_name');
     $table->string('phone_number');
     $table->string('address');
+    $table->string('gcashnumber');
+    $table->string('gcashname');
     $table->text('description')->nullable();
     $table->decimal('price', 10, 2);
     $table->string('photo_path')->nullable();

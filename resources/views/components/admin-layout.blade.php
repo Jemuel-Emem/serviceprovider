@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>TERRASELL</title>
+    <title>ServiceProvider</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -109,6 +109,13 @@
                     <a href="{{route('serv')  }}" class="flex items-center p-2 rounded-lg">
                         <i class="ri-user-2-fill"></i>
                         <span class="ms-3">Service Provider</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('appointment-list')  }}" class="flex items-center p-2 rounded-lg">
+                        <i class="ri-user-2-fill"></i>
+                        <span class="ms-3">Appointment</span>
                     </a>
                 </li>
             </ul>

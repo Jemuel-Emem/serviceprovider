@@ -2,6 +2,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +47,10 @@ Route::middleware([
             return view('admin.service-provider');
         })->name('serv');
 
+        Route::get('/appointments', function(){
+            return view('admin.appointments');
+        })->name('appointment-list');
+
      });
 
      Route::prefix('client')->middleware('client')->group(function(){
@@ -57,6 +62,17 @@ Route::middleware([
         Route::get('/services', function(){
             return view('client.services');
         })->name('servi');
+
+
+        Route::get('/appointments', function(){
+            return view('client.appointments');
+        })->name('apps');
+
+        Route::get('/messages', function(){
+            return view('client.client-service-provider-chat');
+        })->name('mess');
+
+
 
 
      });
@@ -79,7 +95,12 @@ Route::middleware([
             return view('serviceprovider.profile');
         })->name('prof');
 
+        Route::get('/message', function(){
+            return view('serviceprovider.chat');
+        })->name('message');
+
      });
+
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('log');
 Route::view('profile', 'profile')

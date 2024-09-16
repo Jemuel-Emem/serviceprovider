@@ -58,12 +58,13 @@
             color: #3B82F6;
         }
     </style>
-
+@wireUiScripts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- @wireUiScripts --}}
 </head>
 
 <body class="font-sans antialiased h-full bg-no-repeat bg-cover ">
+    <x-notifications position="top-left" />
     <nav class="bg-primary border-gray-200">
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -85,16 +86,14 @@
                         <a href="{{ route('servi') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Services</a>
                     </li>
                     <li>
-                        <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>
+                        <a href="{{ route('apps') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>
                     </li>
                     <li>
                         <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">To Rate</a>
                     </li>
+
                     <li>
-                        <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">Carts</a>
-                    </li>
-                    <li>
-                        <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">Chats</a>
+                        <a href="{{ route('mess') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Chats</a>
                     </li>
                     <li>
                         <a href="{{ route('log') }}" class="block py-2 px-3 text-white uppercase font-bold bg-red-500 rounded">Logout</a>

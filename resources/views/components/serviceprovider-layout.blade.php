@@ -94,7 +94,7 @@
                         <a href="{{ route('app') }}" class="{{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>
                     </li>
                     <li>
-                        <a href="" class=" {{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Message</a>
+                        <a href="{{ route('message') }}" class=" {{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Message</a>
                     </li>
 
                     <li>
@@ -109,7 +109,7 @@
         </div>
     </nav>
 
-    <div class="border-gray-200 rounded-lg dark:border-gray-700 p-6 mt-8 flex items-center justify-center">
+    <div class="border-gray-200 rounded-lg dark:border-gray-700  flex items-center justify-center">
         <main>
             @if(Auth::check() && Auth::user()->role == 2)
                 @if(Auth::user()->serviceproviderstatus === 'approving')

@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class services extends Model
+class appointment extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'user_id',
-        'service_name',
-        'phone_number',
-        'address',
-        'description',
+        'serviceprovider_id',
+        'servicename',
         'price',
-        'photo_path',
-        'gcashname',
-        'gcashnumber'
+        'dateofappointment',
+        'mop',
+        'gcashreceipt',
+        'clientname',
+        'address'
     ];
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -36,7 +36,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'client_id');
+    }
 
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'serviceprovider_id');
+    }
     /**
      * The attributes that should be cast.
      *

@@ -64,9 +64,9 @@
 
             <div id="gcash-info" class="mb-4 hidden">
                 <h4 class="text-lg font-semibold">Gcash Payment Information</h4>
-                <p>Account Name: Your Gcash Account Name</p>
-                <p>Account Number: Your Gcash Account Number</p>
-              
+                <p>Account Name: {{ $selectedService->gcashname }}</p>
+                <p>Account Number: {{ $selectedService->gcashnumber }}</p>
+
                 <!-- File Upload for Receipt -->
                 <div class="mt-4">
                     <label for="receipt" class="block text-sm font-medium text-gray-700">Upload Gcash Receipt</label>

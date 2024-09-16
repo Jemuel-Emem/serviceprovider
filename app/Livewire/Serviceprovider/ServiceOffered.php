@@ -43,6 +43,8 @@ class ServiceOffered extends Component
             'description' => $this->description,
             'price' => $this->price,
             'photo_path' => $photoPath,
+            'gcashnumber' => auth()->user()->gcashnumber,
+            'gcashname' => auth()->user()->gcashname,
         ]);
 
         $this->notification()->success('Service added', 'Service added successfully!');
