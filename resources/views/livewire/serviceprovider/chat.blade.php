@@ -33,8 +33,8 @@
         <div class="flex-1 overflow-y-auto mb-6 p-4  bg-gray-50 rounded-lg border border-gray-300 max-h-[calc(100vh-200px)]">
             @foreach($messages as $message)
                 <div class="mb-4 flex {{ $message->from_client ? 'justify-end' : 'justify-start' }}">
-                    <div class="p-4 rounded-lg {{ $message->from_client ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800' }} max-w-[70%]">
-                        <p>{{ $message->message }}</p>
+                    <div class="w-9/12 p-4 rounded-lg {{ $message->from_client ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800' }} max-w-[70%]">
+                        <p >{{ $message->message }}</p>
                         <span class="text-xs text-gray-600">{{ $message->created_at->format('H:i') }}</span>
                     </div>
                 </div>
