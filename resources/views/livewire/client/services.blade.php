@@ -21,9 +21,22 @@
                     <div class="text-lg font-semibold">{{ $service->service_name }}</div>
                     <p class="text-gray-600">{{ $service->description }}</p>
                     <p class="text-gray-600">Address: {{ $service->address }}</p>
-                    <div class="mt-2 text-indigo-600 font-bold">${{ number_format($service->price, 2) }}</div>
 
+                    <div class="mt-2 text-indigo-600 font-bold">${{ number_format($service->price, 2) }}</div>
+                    <p class="text-amber-400">
+                        Ratings:
+                        @php
+                            $averageRating = $this->getServiceRating($service->service_name);
+                        @endphp
+
+                        @if($averageRating)
+                            {{ number_format($averageRating, 1) }} / 5
+                        @else
+                            No ratings yet
+                        @endif
+                    </p>
                     <!-- Appoint Button -->
+                    <button wire:click="viewComments('{{ $service->service_name }}')" class="mt-4 bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 w-full">View Comments</button>
                     <button wire:click="viewService({{ $service->id }})" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 w-full">Book Now</button>
                 </div>
             @endforeach
@@ -34,6 +47,33 @@
     <div class="mt-6">
         {{ $services->links() }}
     </div>
+    @if($showCommentsModal)
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl p-6">
+            <h3 class="text-xl font-semibold mb-4">Comments for {{ $selectedService->service_name }}</h3>
+
+            <div class="space-y-4">
+                @if($comments->isEmpty())
+                    <p class="text-gray-500">No comments available for this service.</p>
+                @else
+                    @foreach($comments as $comment)
+                        <div class="p-4 bg-gray-100 rounded-lg shadow">
+                            <p class="font-semibold">{{ $comment->client_name }}</p>
+                            <p class="text-gray-600">{{ $comment->comment }}</p>
+                            <p class="text-sm text-gray-400">Posted on {{ $comment->created_at->format('F d, Y') }}</p>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+
+            <!-- Close Comments Modal Button -->
+            <div class="flex justify-between mt-6">
+                <button wire:click="closeCommentsModal" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">Close</button>
+            </div>
+        </div>
+    </div>
+    @endif
+
 
     @if($showModal)
     <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">

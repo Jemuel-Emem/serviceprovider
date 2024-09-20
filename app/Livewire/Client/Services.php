@@ -9,10 +9,13 @@ use Livewire\Component;
 
 class Services extends Component
 {
+    public $showCommentsModal = false;
+    public $comments = [];
+
     use Actions;
     use WithFileUploads;
     public $search = '';
-
+    public $showRateModal = false;
     public $selectedService = null;
     public $showModal = false;
     public $payment_method = null;
@@ -20,6 +23,8 @@ class Services extends Component
     public $receipt = null;
     public $user_name;
     public $user_address;
+
+
     public function render()
     {
         $services = ServiceOffer::query()
@@ -32,6 +37,30 @@ class Services extends Component
         return view('livewire.client.services', compact('services'));
     }
 
+    public function viewComments($servicename)
+    {
+
+        $this->selectedService = ServiceOffer::where('service_name', $servicename)->first();
+
+
+        $this->comments = Appointment::where('servicename', $servicename)->get(); // Assuming 'servicename' is a column in the comments table
+
+
+        $this->showCommentsModal = true;
+    }
+
+    public function closeCommentsModal()
+    {
+        $this->showCommentsModal = false;
+    }
+    public function getServiceRating($serviceName)
+    {
+
+        return Appointment::where('servicename', $serviceName)
+            ->whereNotNull('rating')
+            ->avg('rating');
+    }
+
     public function viewService($serviceId)
     {
         $this->selectedService = ServiceOffer::find($serviceId);
@@ -40,12 +69,14 @@ class Services extends Component
 
     public function appointNow()
     {
+
         $this->validate([
-            'user_name' => 'required|string|max:255',
-            'user_address' => 'required|string|max:255',
+
+
             'appointment_date' => 'required|date',
             'payment_method' => 'required|string',
             'receipt' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
+
         ]);
 
         $receiptPath = $this->receipt ? $this->receipt->store('gcash_receipts', 'public') : null;
@@ -58,9 +89,10 @@ class Services extends Component
             'dateofappointment' => $this->appointment_date,
             'mop' => $this->payment_method,
             'gcashreceipt' => $receiptPath,
-            'clientname'=> $this->user_name,
-            'address'=> $this->user_address,
+            'clientname' => auth()->user()->name,
+            'address'=>"test"
         ]);
+
         $this->notification()->success('Appointment', 'Appointment booked successfully!');
         $this->closeModal();
     }

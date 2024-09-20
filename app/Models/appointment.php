@@ -18,6 +18,8 @@ class appointment extends Model
         'mop',
         'gcashreceipt',
         'clientname',
-        'address'
+        'address',
+        'comment',
+        'rating'
     ];
 }

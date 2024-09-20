@@ -88,9 +88,9 @@
                     <li>
                         <a href="{{ route('apps') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">To Rate</a>
-                    </li>
+                    </li> --}}
 
                     <li>
                         <a href="{{ route('mess') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Chats</a>

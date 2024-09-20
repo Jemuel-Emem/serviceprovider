@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('mop');
             $table->string('gcashreceipt')->nullable();
             $table->string('status')->default('on-process');
+            $table->text('comment')->default("none");
+            $table->decimal('rating', 2, 1)->default(0);
             $table->timestamps();
         });
     }
