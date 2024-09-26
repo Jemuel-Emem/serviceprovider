@@ -8,6 +8,7 @@
                     <th class="py-3 px-6 text-left border-b">Name</th>
                     <th class="py-3 px-6 text-left border-b">Email</th>
                     <th class="py-3 px-6 text-left border-b">Status</th>
+                    <th class="py-3 px-6 text-left border-b ">ID</th>
                     <th class="py-3 px-6 text-left border-b">Actions</th>
                 </tr>
             </thead>
@@ -26,6 +27,13 @@
                         </span>
                     </td>
                     <td class="py-3 px-6">
+                        @if($provider->id_photo)
+                            <img src="{{ asset('storage/' . $provider->id_photo) }}" alt="ID Photo" class="w-16 h-16 rounded-full"> <!-- Display ID Photo -->
+                        @else
+                            <span class="text-gray-500">No ID Photo</span>
+                        @endif
+                    </td>
+                    <td class="py-3 px-6">
                         @if($provider->serviceproviderstatus === 'approving')
                             <button wire:click="approve({{ $provider->id }})" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600">Approve</button>
                             <button wire:click="decline({{ $provider->id }})" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 ml-2">Decline</button>
@@ -33,6 +41,8 @@
                             <span class="text-gray-500">{{ ucfirst($provider->serviceproviderstatus) }}</span>
                         @endif
                     </td>
+
+
                 </tr>
                 @endforeach
             </tbody>

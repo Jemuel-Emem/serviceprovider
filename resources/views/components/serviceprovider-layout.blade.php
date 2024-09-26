@@ -74,7 +74,7 @@
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="{{ asset('images/serviceprovider.jpg') }}" alt="Service Provider" class="w-16 h-16 border-2 rounded-full">
-                <label for="" class="font-black text-white text-2xl nav-logo">ServiceProvider</label>
+                <label for="" class="font-black text-white text-2xl nav-logo">LHSP</label>
             </a>
             <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-200 rounded-lg md:hidden hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-default" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>

@@ -95,7 +95,7 @@
                             <img src="{{ asset('images/serviceprovider.jpg') }}" alt="Profile Photo" class="w-16 h-16 border-2 rounded-full">
                         </div>
                         <div class="text-center mt-2">
-                            <label for="" class="font-black text-white text-xl">SERVICE PROVIDER</label>
+                            <label for="" class="font-black text-white text-xl">LHSP</label>
                         </div>
                     </div>
                 </a>
