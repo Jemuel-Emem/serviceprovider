@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>LHSP</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,8 +16,29 @@
 
     <!-- Additional Styling -->
     <style>
+        /* Keyframe animation to smoothly transition between blue shades */
+        @keyframes blueLightingEffect {
+            0% {
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            }
+            25% {
+                background: linear-gradient(135deg, #2962ff 0%, #2e86c1 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #3498db 0%, #5dade2 100%);
+            }
+            75% {
+                background: linear-gradient(135deg, #2a5298 0%, #2962ff 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            }
+        }
+
         body {
             background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            animation: blueLightingEffect 10s infinite alternate; /* Smooth color transitions every 10 seconds */
+            transition: background 0.3s ease;
         }
 
         .logo-container img {
@@ -89,7 +110,7 @@
         <div class="w-full sm:max-w-md mt-8 px-6 py-8 card">
             <h2 class="custom-title text-center mb-6">{{ __('Welcome Back!') }}</h2>
 
-            <!-- Slot content (e.g., form or other content) -->
+
             {{ $slot }}
 
             <!-- Optional Primary Button Example -->

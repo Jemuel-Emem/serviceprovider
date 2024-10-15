@@ -121,7 +121,7 @@
             </ul>
 
             <div class="sidebar-footer bg-indigo-600  flex justify-center">
-                <a href="{{ route('log') }}" class="text-white text-lg font-semibold rounded-md px-4 py-2 inline-block hover:text-red-500 transition duration-300 ease-in-out">
+                <a href="{{ route('log') }}" class="text-white text-lg font-semibold rounded-md px-4 h-2 inline-block hover:text-red-500 transition duration-300 ease-in-out">
                     Logout
                 </a>
             </div>
