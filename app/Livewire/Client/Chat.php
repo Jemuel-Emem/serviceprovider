@@ -21,6 +21,12 @@ class Chat extends Component
         $this->serviceProviders = User::where('role', 2)->get(); // Fetch service providers with role 2
     }
 
+    public function selectServiceProvider($providerId)
+    {
+        $this->selectedServiceProvider = $providerId;
+        $this->loadMessages(); // Load messages for the selected provider
+    }
+
     public function loadMessages()
     {
         if (!$this->selectedServiceProvider) {
@@ -55,7 +61,7 @@ class Chat extends Component
         ]);
 
         $this->newMessage = '';
-        $this->loadMessages(); // Reload messages after sending
+        $this->loadMessages();
     }
 
     public function render()

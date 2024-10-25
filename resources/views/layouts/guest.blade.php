@@ -17,38 +17,7 @@
     <!-- Additional Styling -->
     <style>
         /* Keyframe animation to smoothly transition between blue shades */
-        @keyframes blueLightingEffect {
-            0% {
-                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            }
-            25% {
-                background: linear-gradient(135deg, #2962ff 0%, #2e86c1 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #3498db 0%, #5dade2 100%);
-            }
-            75% {
-                background: linear-gradient(135deg, #2a5298 0%, #2962ff 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            }
-        }
 
-        body {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            animation: blueLightingEffect 10s infinite alternate; /* Smooth color transitions every 10 seconds */
-            transition: background 0.3s ease;
-        }
-
-        .logo-container img {
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .logo-container img:hover {
-            transform: scale(1.05);
-        }
 
         .card {
             background: #fff;
@@ -89,7 +58,6 @@
             color: #2c3e50;
         }
 
-        /* Responsive adjustments */
         @media (min-width: 640px) {
             .card {
                 padding: 2.5rem;
