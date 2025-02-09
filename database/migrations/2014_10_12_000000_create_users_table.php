@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('role')->default(0);
+            $table->string('address')->nullable();
             $table->string('gcashname')->nullable();
             $table->string('gcashnumber')->nullable();
             $table->string('id_photo')->nullable();

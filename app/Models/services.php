@@ -19,4 +19,10 @@ class services extends Model
         'gcashname',
         'gcashnumber'
     ];
+
+
+public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
 }

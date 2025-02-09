@@ -28,11 +28,14 @@
                     </td>
                     <td class="py-3 px-6">
                         @if($provider->id_photo)
-                            <img src="{{ asset('storage/' . $provider->id_photo) }}" alt="ID Photo" class="w-16 h-16 rounded-full"> <!-- Display ID Photo -->
+                            <a href="{{ asset('storage/' . $provider->id_photo) }}" target="_blank">
+                                <img src="{{ asset('storage/' . $provider->id_photo) }}" alt="ID Photo" class="w-16 h-16 rounded-full">
+                            </a>
                         @else
                             <span class="text-gray-500">No ID Photo</span>
                         @endif
                     </td>
+
                     <td class="py-3 px-6">
                         @if($provider->serviceproviderstatus === 'approving')
                             <button wire:click="approve({{ $provider->id }})" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600">Approve</button>

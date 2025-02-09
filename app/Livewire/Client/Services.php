@@ -28,9 +28,10 @@ class Services extends Component
     public function render()
     {
         $services = ServiceOffer::query()
+            ->with('user')
             ->when($this->search, function ($query) {
                 $query->where('service_name', 'like', "%{$this->search}%")
-                    ->orWhere('description', 'like', "%{$this->search}%");
+                      ->orWhere('description', 'like', "%{$this->search}%");
             })
             ->paginate(10);
 

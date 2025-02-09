@@ -21,8 +21,10 @@
                     <div class="text-lg font-semibold">{{ $service->service_name }}</div>
                     <p class="text-gray-600">{{ $service->description }}</p>
                     <p class="text-gray-600">Address: {{ $service->address }}</p>
+                    <p class="text-gray-600">Service Provider: {{ $service->user->name }}</p> <!-- Display service provider's name -->
 
-                    <div class="mt-2 text-indigo-600 font-bold">${{ number_format($service->price, 2) }}</div>
+                    <div class="mt-2 text-indigo-600 font-bold">Php{{ number_format($service->price, 2) }}</div>
+
                     <p class="text-amber-400">
                         Ratings:
                         @php
@@ -47,6 +49,7 @@
     <div class="mt-6">
         {{ $services->links() }}
     </div>
+
     @if($showCommentsModal)
     <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl p-6">
@@ -74,7 +77,6 @@
     </div>
     @endif
 
-
     @if($showModal)
     <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl p-6">
@@ -82,6 +84,7 @@
             <img src="{{ asset('storage/' . $selectedService->photo_path) }}" alt="Service Photo" class="h-32 w-full object-cover rounded-lg mb-4">
             <p class="text-gray-600 mb-2">{{ $selectedService->description }}</p>
             <p class="text-gray-600 mb-2">Address: {{ $selectedService->address }}</p>
+            <p class="text-gray-600 mb-2">Service Provider: {{ $selectedService->user->name }}</p> <!-- Display service provider's name -->
             <p class="text-indigo-600 font-bold text-lg mb-4">${{ number_format($selectedService->price, 2) }}</p>
 
             <!-- Date of Appointment -->
@@ -122,30 +125,27 @@
             </div>
         </div>
     </div>
-@endif
+    @endif
 
-
-
-<!-- Flash Message -->
-@if(session()->has('message'))
-    <div class="fixed bottom-0 right-0 p-4">
-        <div class="bg-green-500 text-white p-4 rounded-md shadow-md">
-            {{ session('message') }}
+    <!-- Flash Message -->
+    @if(session()->has('message'))
+        <div class="fixed bottom-0 right-0 p-4">
+            <div class="bg-green-500 text-white p-4 rounded-md shadow-md">
+                {{ session('message') }}
+            </div>
         </div>
-    </div>
-@endif
+    @endif
 
-<script>
-    function toggleGcashInfo() {
-        var paymentMethod = document.getElementById('payment_method').value;
-        var gcashInfo = document.getElementById('gcash-info');
+    <script>
+        function toggleGcashInfo() {
+            var paymentMethod = document.getElementById('payment_method').value;
+            var gcashInfo = document.getElementById('gcash-info');
 
-        if (paymentMethod === 'gcash') {
-            gcashInfo.classList.remove('hidden');
-        } else {
-            gcashInfo.classList.add('hidden');
+            if (paymentMethod === 'gcash') {
+                gcashInfo.classList.remove('hidden');
+            } else {
+                gcashInfo.classList.add('hidden');
+            }
         }
-    }
-</script>
-
+    </script>
 </div>

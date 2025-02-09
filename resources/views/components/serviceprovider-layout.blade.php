@@ -112,19 +112,31 @@
     <div class="border-gray-200 rounded-lg dark:border-gray-700  flex items-center justify-center">
         <main>
             @if(Auth::check() && Auth::user()->role == 2)
-                @if(Auth::user()->serviceproviderstatus === 'approving')
-                    <div class="text-center">
-                        <div class="bg-white  ">
-
-                            <h1 class="text-4xl font-bold text-indigo-600 mb-4">WAIT FOR APPROVAL</h1>
-                            <p class="text-lg text-gray-700">Your account is currently being reviewed by our administrators. We will notify you once the approval process is complete.</p>
-                            <p class="mt-4 text-sm text-gray-500">Thank you for your patience and for choosing to provide services on our platform.</p>
-                        </div>
+            @if(Auth::user()->serviceproviderstatus === 'approving')
+                <div class="text-center">
+                    <div class="bg-white">
+                        <h1 class="text-4xl font-bold text-indigo-600 mb-4">WAIT FOR APPROVAL</h1>
+                        <p class="text-lg text-gray-700">
+                            Your account is currently being reviewed by our administrators. We will notify you once the approval process is complete.
+                        </p>
+                        <p class="mt-4 text-sm text-gray-500">
+                            Thank you for your patience and for choosing to provide services on our platform.
+                        </p>
                     </div>
-                @else
-                    {{ $slot }}
-                @endif
+                </div>
+            @elseif(Auth::user()->serviceproviderstatus === 'declined')
+                <div class="text-center">
+                    <div class="bg-white">
+                        <h1 class="text-4xl font-bold text-red-600 mb-4">APPLICATION DECLINED</h1>
+                        <p class="text-lg text-gray-700">
+                            Unfortunately, your application has been declined. You may review the requirements and reapply if applicable.
+                        </p>
+                    </div>
+                </div>
+            @else
+                {{ $slot }}
             @endif
+        @endif
         </main>
     </div>
 

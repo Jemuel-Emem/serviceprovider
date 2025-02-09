@@ -17,7 +17,7 @@
                 @forelse($appointments as $appointment)
                     <tr class="hover:bg-gray-200 transition duration-300">
                         <td class="py-4 px-4 border-b border-gray-200">{{ $appointment->servicename }}</td>
-                        <td class="py-4 px-4 border-b border-gray-200">${{ number_format($appointment->price, 2) }}</td>
+                        <td class="py-4 px-4 border-b border-gray-200">Php{{ number_format($appointment->price, 2) }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">{{ \Carbon\Carbon::parse($appointment->dateofappointment)->format('F j, Y') }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">
                             <span class="px-3 py-1 rounded-full text-sm font-semibold
@@ -31,7 +31,11 @@
                         <!-- Rate Button -->
                         <td class="py-4 px-4 border-b border-gray-200">
                             @if($appointment->status === 'completed')
-                                <button wire:click="openRateModal({{ $appointment->id }})" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Rate</button>
+                                @if($appointment->rating)
+                                    <span class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Action Taken</span>
+                                @else
+                                    <button wire:click="openRateModal({{ $appointment->id }})" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Rate</button>
+                                @endif
                             @else
                                 <span class="text-gray-500">Not Available</span>
                             @endif
