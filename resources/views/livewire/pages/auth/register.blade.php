@@ -14,6 +14,7 @@ new #[Layout('layouts.guest')] class extends Component
 {
     use WithFileUploads;
     public string $name = '';
+    public string $phonenumber = '';
     public string $address = '';
     public string $email = '';
     public string $password = '';
@@ -30,6 +31,7 @@ new #[Layout('layouts.guest')] class extends Component
         // Validate the form data, including the file
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
+            'phonenumber' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
@@ -69,6 +71,11 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
+        <div>
+            <x-input-label for="phonenumber" :value="__('Phone Number')" />
+            <x-text-input wire:model="phonenumber" id="phonenumber" class="block mt-1 w-full" type="text" name="phonenumber" required autofocus autocomplete="phonenumber" />
+            <x-input-error :messages="$errors->get('phonenumber')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="address" :value="__('Address')" />

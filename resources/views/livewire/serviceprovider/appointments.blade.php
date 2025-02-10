@@ -14,6 +14,7 @@
                 <tr>
                     <th class="py-3 px-4 text-left font-semibold">Client Name</th>
                     <th class="py-3 px-4 text-left font-semibold">Address</th>
+                    <th class="py-3 px-4 text-left font-semibold">Phone Number</th>
                     <th class="py-3 px-4 text-left font-semibold">Service Name</th>
                     <th class="py-3 px-4 text-left font-semibold">Price</th>
                     <th class="py-3 px-4 text-left font-semibold">Date of Appointment</th>
@@ -28,6 +29,7 @@
                     <tr class="hover:bg-gray-200 transition duration-300">
                         <td class="py-4 px-4 border-b border-gray-200">{{ $appointment->clientname }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">{{ $appointment->address }}</td>
+                        <td class="py-4 px-4 border-b border-gray-200">{{ $appointment->phonenumber }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">{{ $appointment->servicename }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">${{ number_format($appointment->price, 2) }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">{{ \Carbon\Carbon::parse($appointment->dateofappointment)->format('F j, Y') }}</td>

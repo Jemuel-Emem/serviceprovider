@@ -91,7 +91,8 @@ class Services extends Component
             'mop' => $this->payment_method,
             'gcashreceipt' => $receiptPath,
             'clientname' => auth()->user()->name,
-            'address'=>"test"
+            'phonenumber' => auth()->user()->phonenumber,
+            'address'=> auth()->user()->address,
         ]);
 
         $this->notification()->success('Appointment', 'Appointment booked successfully!');

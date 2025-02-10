@@ -34,19 +34,46 @@ class Appointments extends Component
     public function approveAppointment($appointmentId)
     {
         $appointment = Appointment::find($appointmentId);
-        $appointment->status = 'completed';
-        $appointment->save();
-    }
 
+        if ($appointment) {
+            $appointment->status = 'completed';
+            $appointment->save();
+            $message = "Your appointment for {$appointment->servicename} on {$appointment->dateofappointment} has been APPROVED. Thank you!";
+        }
+    }
 
     public function declineAppointment($appointmentId)
     {
-
         $appointment = Appointment::find($appointmentId);
-        $appointment->status = 'canceled';
-        $appointment->save();
+
+        if ($appointment) {
+            $appointment->status = 'canceled';
+            $appointment->save();
+
+
+            $this->sendSMS($appointment->phonenumber, "We regret to inform you that your appointment for {$appointment->servicename} has been declined.");
+        }
     }
 
+    private function sendSMS($phoneNumber, $message)
+    {
+        $ch = curl_init();
+
+        $parameters = array(
+            'apikey' => '046125f45f4f187e838905df98273c4e',
+            'number' => $phoneNumber,
+            'message' => $message,
+            'sendername' => 'Estanz'
+        );
+
+        curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/messages');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+    }
     public function closeDeclineModal()
     {
         $this->showDeclineModal = false;

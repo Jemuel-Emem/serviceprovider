@@ -20,6 +20,8 @@ class appointment extends Model
         'clientname',
         'address',
         'comment',
-        'rating'
+        'rating',
+        'phonenumber',
+        'address'
     ];
 }

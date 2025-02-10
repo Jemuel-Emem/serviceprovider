@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('serviceprovider_id')->constrained('users')->onDelete('cascade');
             $table->string('clientname');
+            $table->string('phonenumber');
             $table->string('address');
             $table->string('servicename');
             $table->decimal('price', 10, 2);
