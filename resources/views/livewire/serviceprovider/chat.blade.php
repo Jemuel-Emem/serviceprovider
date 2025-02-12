@@ -9,10 +9,20 @@
                             class="w-full flex items-center px-4 py-3 rounded-lg hover:bg-indigo-50 transition duration-150 ease-in-out
                             {{ $user->id === $selectedUser ? 'bg-indigo-100 text-indigo-700' : 'text-white' }}">
                         <span class="text-lg font-semibold">{{ $user->name }}</span>
+
+                        @php
+                            $unreadCount = $this->getUnreadMessagesCount($user->id);
+                        @endphp
+                        @if($unreadCount > 0)
+                            <span class="bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ml-2">
+                                {{ $unreadCount }}
+                            </span>
+                        @endif
                     </button>
                 </li>
             @endforeach
         </ul>
+
     </div>
 
 

@@ -38,6 +38,9 @@ class Services extends Component
         return view('livewire.client.services', compact('services'));
     }
 
+    public function searchh(){
+
+    }
     public function viewComments($servicename)
     {
 

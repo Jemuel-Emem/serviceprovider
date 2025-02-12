@@ -13,6 +13,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
 
     <style>
         [x-cloak] {
@@ -85,9 +87,24 @@
                     <li>
                         <a href="{{ route('servi') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Services</a>
                     </li>
+
                     <li>
-                        <a href="{{ route('apps') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>
+                        @php
+                            $appointmentCount = \App\Models\Appointment::where('user_id', Auth::id())
+                                ->where('status', 'on-process')
+                                ->count();
+                        @endphp
+
+                        <a href="{{ route('apps') }}" class="block py-2 px-3 text-white uppercase font-bold nav-link relative">
+                            Appointments
+                            @if($appointmentCount > 0)
+                                <span class="bg-red-600 text-white text-xs font-bold rounded-full px-2 py-1 absolute top-0 right-0 transform translate-x-2 -translate-y-2">
+                                    {{ $appointmentCount }}
+                                </span>
+                            @endif
+                        </a>
                     </li>
+
                     {{-- <li>
                         <a href="" class="block py-2 px-3 text-white uppercase font-bold nav-link">To Rate</a>
                     </li> --}}
@@ -103,7 +120,7 @@
         </div>
     </nav>
 
-    <div class="border-gray-200 rounded-lg dark:border-gray-700 ">
+    <div class="border-gray-200  dark:border-gray-700 ">
         <main>
             {{ $slot }}
         </main>

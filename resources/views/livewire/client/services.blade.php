@@ -18,8 +18,8 @@
                     <img src="{{ asset('storage/' . $service->photo_path) }}" alt="Service Photo" class="h-32 w-full object-cover rounded-t-lg mb-4">
 
                     <!-- Service Info -->
-                    <div class="text-lg font-semibold">{{ $service->service_name }}</div>
-                    <p class="text-gray-600">{{ $service->description }}</p>
+                    <div class="text-lg font-semibold">Service:{{ $service->service_name }}</div>
+                    <p class="text-gray-600">Description:{{ $service->description }}</p>
                     <p class="text-gray-600">Address: {{ $service->address }}</p>
                     <p class="text-gray-600">Service Provider: {{ $service->user->name }}</p> <!-- Display service provider's name -->
 
@@ -85,7 +85,7 @@
             <p class="text-gray-600 mb-2">{{ $selectedService->description }}</p>
             <p class="text-gray-600 mb-2">Address: {{ $selectedService->address }}</p>
             <p class="text-gray-600 mb-2">Service Provider: {{ $selectedService->user->name }}</p> <!-- Display service provider's name -->
-            <p class="text-indigo-600 font-bold text-lg mb-4">${{ number_format($selectedService->price, 2) }}</p>
+            <p class="text-indigo-600 font-bold text-lg mb-4">Php{{ number_format($selectedService->price, 2) }}</p>
 
             <!-- Date of Appointment -->
             <div class="mb-4">

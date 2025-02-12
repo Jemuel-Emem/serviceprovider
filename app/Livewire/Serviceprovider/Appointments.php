@@ -55,6 +55,10 @@ class Appointments extends Component
         }
     }
 
+    public function printReceipt($appointmentId)
+    {
+        return redirect()->route('appointments.printReceipt', ['appointment' => $appointmentId]);
+    }
     private function sendSMS($phoneNumber, $message)
     {
         $ch = curl_init();

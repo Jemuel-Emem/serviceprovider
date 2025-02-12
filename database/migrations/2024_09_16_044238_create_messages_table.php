@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('serviceprovider_id'); // Refers to the service provider
             $table->text('message'); // The message content
             $table->boolean('from_client')->default(true); // To identify who sent the message
-
+            $table->boolean('is_read')->default(false);
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('serviceprovider_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

@@ -31,14 +31,14 @@
                         <td class="py-4 px-4 border-b border-gray-200">{{ $appointment->address }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">{{ $appointment->phonenumber }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">{{ $appointment->servicename }}</td>
-                        <td class="py-4 px-4 border-b border-gray-200">${{ number_format($appointment->price, 2) }}</td>
+                        <td class="py-4 px-4 border-b border-gray-200">Php{{ number_format($appointment->price, 2) }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">{{ \Carbon\Carbon::parse($appointment->dateofappointment)->format('F j, Y') }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">{{ ucfirst($appointment->mop) }}</td>
                         <td class="py-4 px-4 border-b border-gray-200">
                             @if($appointment->gcashreceipt)
                                 <a href="{{ asset('storage/' . $appointment->gcashreceipt) }}" target="_blank" class="text-indigo-600 hover:underline">View Receipt</a>
                             @else
-                                <span class="text-gray-500">No receipt</span>
+                                <span class="text-gray-500">MOP- WALK IN</span>
                             @endif
                         </td>
                         <td class="py-4 px-4 border-b border-gray-200">
@@ -47,16 +47,27 @@
                                 @elseif($appointment->status === 'completed') bg-green-200 text-green-700
                                 @elseif($appointment->status === 'canceled') bg-red-200 text-red-700
                                 @endif">
-                                {{ ucfirst($appointment->status) }}
+                                {{ $appointment->status === 'completed' ? 'Approved' : ucfirst($appointment->status) }}
+
                             </span>
+
+
                         </td>
+
                         <td class="py-4 px-4 border-b border-gray-200">
                             @if($appointment->status === 'on-process')
                                 <button wire:click="approveAppointment({{ $appointment->id }})" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">Approve</button>
                                 <button wire:click="declineAppointment({{ $appointment->id }})" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">Decline</button>
                             @else
-                                <span class="text-gray-500">Action taken</span>
+                            @if($appointment->status === 'completed')
+                            <button onclick="window.location.href='{{ route('appointments.printReceipt', ['appointment' => $appointment->id]) }}'"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                                Print Receipt
+                            </button>
+                        @endif
                             @endif
+
+
                         </td>
                     </tr>
                 @empty
@@ -68,8 +79,10 @@
         </table>
     </div>
 
-    <!-- Pagination -->
+
     <div class="mt-6">
         {{ $appointments->links('pagination::tailwind') }}
     </div>
+
+
 </div>

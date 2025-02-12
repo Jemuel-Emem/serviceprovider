@@ -27,24 +27,57 @@ class Chat extends Component
         $this->loadMessages(); // Load messages for the selected provider
     }
 
-    public function loadMessages()
-    {
-        if (!$this->selectedServiceProvider) {
-            session()->flash('message', 'Please select a service provider.');
-            return;
-        }
+    // public function loadMessages()
+    // {
+    //     if (!$this->selectedServiceProvider) {
+    //         session()->flash('message', 'Please select a service provider.');
+    //         return;
+    //     }
 
-        $this->messages = Message::with('client', 'serviceProvider')
-            ->where(function ($query) {
-                $query->where('client_id', $this->user->id)
-                      ->where('serviceprovider_id', $this->selectedServiceProvider);
-            })
-            ->orWhere(function ($query) {
-                $query->where('serviceprovider_id', $this->user->id)
-                      ->where('client_id', $this->selectedServiceProvider);
-            })
-            ->get();
+    //     $this->messages = Message::with('client', 'serviceProvider')
+    //         ->where(function ($query) {
+    //             $query->where('client_id', $this->user->id)
+    //                   ->where('serviceprovider_id', $this->selectedServiceProvider);
+    //         })
+    //         ->orWhere(function ($query) {
+    //             $query->where('serviceprovider_id', $this->user->id)
+    //                   ->where('client_id', $this->selectedServiceProvider);
+    //         })
+    //         ->get();
+    // }
+
+    public function loadMessages()
+{
+    if (!$this->selectedServiceProvider) {
+        session()->flash('message', 'Please select a service provider.');
+        return;
     }
+
+    $this->messages = Message::with('client', 'serviceProvider')
+        ->where(function ($query) {
+            $query->where('client_id', $this->user->id)
+                  ->where('serviceprovider_id', $this->selectedServiceProvider);
+        })
+        ->orWhere(function ($query) {
+            $query->where('serviceprovider_id', $this->user->id)
+                  ->where('client_id', $this->selectedServiceProvider);
+        })
+        ->get();
+
+    // Mark all messages as read
+    Message::where('serviceprovider_id', $this->user->id)
+        ->where('client_id', $this->selectedServiceProvider)
+        ->update(['is_read' => true]);
+}
+
+public function getUnreadMessagesCount($providerId)
+{
+    return Message::where('client_id', $this->user->id)
+        ->where('serviceprovider_id', $providerId)
+        ->where('is_read', false)
+        ->count();
+}
+
 
     public function sendMessage()
     {

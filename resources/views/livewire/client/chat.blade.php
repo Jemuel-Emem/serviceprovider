@@ -1,8 +1,8 @@
 <div class="flex h-screen">
-    <!-- Service Provider List on the Left -->
+
     <div class="w-1/4 bg-indigo-900 p-6 border-r border-gray-300 overflow-y-auto">
         <h2 class="text-4xl font-bold mb-6 text-white">Service Providers</h2>
-        <ul>
+        {{-- <ul>
             @foreach($serviceProviders as $provider)
                 <li class="mb-4">
                     <button wire:click="selectServiceProvider({{ $provider->id }})"
@@ -12,10 +12,32 @@
                     </button>
                 </li>
             @endforeach
+        </ul> --}}
+
+        <ul>
+            @foreach($serviceProviders as $provider)
+                <li class="mb-4">
+                    <button wire:click="selectServiceProvider({{ $provider->id }})"
+                            class="w-full flex items-center px-4 py-3 rounded-lg hover:bg-indigo-50 transition duration-150 ease-in-out
+                            {{ $provider->id === $selectedServiceProvider ? 'bg-indigo-100 text-indigo-700' : 'text-white' }}">
+                        <span class="text-lg font-semibold">{{ $provider->name }}</span>
+
+                        @php
+                            $unreadCount = $this->getUnreadMessagesCount($provider->id);
+                        @endphp
+                        @if($unreadCount > 0)
+                            <span class="bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ml-2">
+                                {{ $unreadCount }}
+                            </span>
+                        @endif
+                    </button>
+                </li>
+            @endforeach
         </ul>
+
     </div>
 
-    <!-- Chat Area on the Right -->
+
     <div class="flex-1 flex flex-col bg-white p-6">
         <div class="flex items-center justify-between border-b border-gray-300 pb-4 mb-6">
             <h3 class="text-3xl font-semibold text-indigo-800">

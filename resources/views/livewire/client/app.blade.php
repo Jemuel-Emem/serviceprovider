@@ -25,20 +25,18 @@
                                 @elseif($appointment->status === 'completed') bg-green-200 text-green-700
                                 @elseif($appointment->status === 'canceled') bg-red-200 text-red-700
                                 @endif">
-                                {{ ucfirst($appointment->status) }}
+                                {{ $appointment->status === 'completed' ? 'Approved' : ucfirst($appointment->status) }}
                             </span>
                         </td>
-                        <!-- Rate Button -->
+
+
                         <td class="py-4 px-4 border-b border-gray-200">
-                            @if($appointment->status === 'completed')
-                                @if($appointment->rating)
-                                    <span class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Action Taken</span>
-                                @else
-                                    <button wire:click="openRateModal({{ $appointment->id }})" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Rate</button>
-                                @endif
-                            @else
-                                <span class="text-gray-500">Not Available</span>
-                            @endif
+                            @if(!is_null($appointment->rating) && $appointment->rating > 0)
+                            <span class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Action Taken</span>
+                        @else
+                            <button wire:click="openRateModal({{ $appointment->id }})" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Rate</button>
+                        @endif
+
                         </td>
                     </tr>
                 @empty

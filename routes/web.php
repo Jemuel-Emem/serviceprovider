@@ -101,7 +101,7 @@ Route::middleware([
 
      });
 
-
+     Route::get('/appointments/{appointment}/receipt', [App\Http\Controllers\AppointmentController::class, 'printReceipt'])->name('appointments.printReceipt');
 Route::get('/logout', [AuthController::class, 'logout'])->name('log');
 Route::view('profile', 'profile')
     ->middleware(['auth'])

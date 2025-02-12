@@ -91,8 +91,22 @@
                         <a href="{{ route('service-off') }}" class="{{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Services Offer</a>
                     </li>
                     <li>
-                        <a href="{{ route('app') }}" class="{{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Appointments</a>
+                        @php
+                            $appointmentCount = \App\Models\Appointment::where('serviceprovider_id', Auth::id())
+                                ->where('status', 'on-process')
+                                ->count();
+                        @endphp
+
+                        <a href="{{ route('app') }}" class="{{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link relative">
+                            Appointments
+                            @if($appointmentCount > 0)
+                                <span class="bg-red-600 text-white text-xs font-bold rounded-full px-2 py-1 absolute top-0 right-0 transform translate-x-2 -translate-y-2">
+                                    {{ $appointmentCount }}
+                                </span>
+                            @endif
+                        </a>
                     </li>
+
                     <li>
                         <a href="{{ route('message') }}" class=" {{ (!Auth::user()->gcashnumber || !Auth::user()->gcashname || !Auth::user()->id_photo) ? 'disabled-link' : 'nav-link' }} block py-2 px-3 text-white uppercase font-bold nav-link">Message</a>
                     </li>

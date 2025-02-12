@@ -1,5 +1,5 @@
 <x-client-layout>
-    <div class=" p-2 ">
+    <div class="  ">
 
         <livewire:client.index />
     </div>

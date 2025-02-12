@@ -32,22 +32,55 @@ class Chat extends Component
         $this->loadMessages();
     }
 
-    public function loadMessages()
-    {
-        if (!$this->selectedUser) {
-            return;
-        }
+    // public function loadMessages()
+    // {
+    //     if (!$this->selectedUser) {
+    //         return;
+    //     }
 
-        $this->messages = Message::where(function ($query) {
-            $query->where('client_id', $this->selectedUser)
-                  ->where('serviceprovider_id', Auth::id());
-        })
-        ->orWhere(function ($query) {
-            $query->where('serviceprovider_id', $this->selectedUser)
-                  ->where('client_id', Auth::id());
-        })
-        ->get();
+    //     $this->messages = Message::where(function ($query) {
+    //         $query->where('client_id', $this->selectedUser)
+    //               ->where('serviceprovider_id', Auth::id());
+    //     })
+    //     ->orWhere(function ($query) {
+    //         $query->where('serviceprovider_id', $this->selectedUser)
+    //               ->where('client_id', Auth::id());
+    //     })
+    //     ->get();
+    // }
+
+    public function loadMessages()
+{
+    if (!$this->selectedUser) {
+        return;
     }
+
+    $this->messages = Message::where(function ($query) {
+        $query->where('client_id', $this->selectedUser)
+              ->where('serviceprovider_id', Auth::id());
+    })
+    ->orWhere(function ($query) {
+        $query->where('serviceprovider_id', $this->selectedUser)
+              ->where('client_id', Auth::id());
+    })
+    ->get();
+
+
+    Message::where('client_id', $this->selectedUser)
+        ->where('serviceprovider_id', Auth::id())
+        ->where('is_read', false)
+        ->update(['is_read' => true]);
+
+    $this->loadUsers();
+}
+public function getUnreadMessagesCount($clientId)
+{
+    return Message::where('client_id', $clientId)
+        ->where('serviceprovider_id', Auth::id())
+        ->where('is_read', false)
+        ->count();
+}
+
 
     public function sendMessage()
     {
