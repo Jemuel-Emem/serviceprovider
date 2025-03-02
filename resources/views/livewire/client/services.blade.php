@@ -20,10 +20,13 @@
                     <!-- Service Info -->
                     <div class="text-lg font-semibold">Service:{{ $service->service_name }}</div>
                     <p class="text-gray-600">Description:{{ $service->description }}</p>
-                    <p class="text-gray-600">Address: {{ $service->address }}</p>
+                    <p class="text-gray-600">Address: {{ $service->user->address }}</p>
                     <p class="text-gray-600">Service Provider: {{ $service->user->name }}</p> <!-- Display service provider's name -->
 
-                    <div class="mt-2 text-indigo-600 font-bold">Php{{ number_format($service->price, 2) }}</div>
+                    <div class="mt-2 text-indigo-600 font-bold flex justify-between">
+                        <p class="text-gray-600">Php{{ number_format($service->price, 2) }}</p>
+                        <p class="text-green-600 bg-gray-300 rounded-full p w-32 text-center"> {{ $service->status}}</p>
+                    </div>
 
                     <p class="text-amber-400">
                         Ratings:
@@ -83,11 +86,14 @@
             <h3 class="text-xl font-semibold mb-4">{{ $selectedService->service_name }}</h3>
             <img src="{{ asset('storage/' . $selectedService->photo_path) }}" alt="Service Photo" class="h-32 w-full object-cover rounded-lg mb-4">
             <p class="text-gray-600 mb-2">{{ $selectedService->description }}</p>
-            <p class="text-gray-600 mb-2">Address: {{ $selectedService->address }}</p>
+            <p class="text-gray-600 mb-2">Address: {{  $service->user->address  }}</p>
             <p class="text-gray-600 mb-2">Service Provider: {{ $selectedService->user->name }}</p> <!-- Display service provider's name -->
+          <div class="flex justify-between">
             <p class="text-indigo-600 font-bold text-lg mb-4">Php{{ number_format($selectedService->price, 2) }}</p>
+            <p class="text-green-600 font-bold text-lg mb-4">{{ ($selectedService->status) }}</p>
+        </div>
 
-            <!-- Date of Appointment -->
+
             <div class="mb-4">
                 <label for="appointment_date" class="block text-sm font-medium text-gray-700">Date of Appointment</label>
                 <input type="date" id="appointment_date" wire:model="appointment_date" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" />

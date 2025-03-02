@@ -53,13 +53,36 @@ new #[Layout('layouts.guest')] class extends Component
 
         // Create a new user with the validated data
         event(new Registered($user = User::create($validated)));
-
+        if ($this->role === 'service_provider') {
+        $message = "YOU ARE SUCCESSFULLY REGISTERED. WAIT FOR THE APPROVAL OF ADMIN.";
+        $this->sendSMS($user->phonenumber, $message);
+    }
         // Log the user in
         Auth::login($user);
 
         // Redirect the user to the home page
         $this->redirect(RouteServiceProvider::HOME, navigate: true);
     }
+
+    private function sendSMS($phoneNumber, $message)
+{
+    $ch = curl_init();
+
+    $parameters = array(
+        'apikey' => '046125f45f4f187e838905df98273c4e', // Replace with your actual API key
+        'number' => $phoneNumber,
+        'message' => $message,
+        'sendername' => 'Estanz'
+    );
+
+    curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/messages');
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $output = curl_exec($ch);
+    curl_close($ch);
+}
 
 };
 ?>

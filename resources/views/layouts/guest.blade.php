@@ -70,7 +70,7 @@
         <!-- Logo Section -->
         <div class="logo-container">
             <a href="/" wire:navigate>
-                <img src="{{ asset('images/serviceprovider.jpg') }}" alt="Service Provider" class="w-24 h-24 rounded-full">
+                <img src="{{ asset('images/serviceprovider.jpg') }}" alt="Service Provider" class="w-64 h-64 rounded-full">
             </a>
         </div>
 

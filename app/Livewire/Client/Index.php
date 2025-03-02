@@ -20,7 +20,7 @@ class Index extends Component
 
         if (!empty($this->search)) {
             $this->services = Services::where('service_name', 'like', '%' . $this->search . '%')
-                ->orWhere('address', 'like', '%' . $this->search . '%')
+
                 ->get();
         } else {
             $this->services = [];

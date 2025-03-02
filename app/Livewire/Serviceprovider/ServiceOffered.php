@@ -18,13 +18,14 @@ class ServiceOffered extends Component
     public $address;
     public $description;
     public $price;
+    public $status;
     public $serviceId;
 
     protected $rules = [
         'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
         'service_name' => 'required|string|max:255',
-        'phone_number' => 'required|string|max:15',
-        'address' => 'required|string|max:255',
+        'phone_number' => 'nullable|string|max:15',
+        'address' => 'nullable|string|max:255',
         'description' => 'required|string',
         'price' => 'required|numeric|min:0',
     ];
@@ -38,8 +39,8 @@ class ServiceOffered extends Component
         Service::create([
             'user_id' => auth()->id(),
             'service_name' => $this->service_name,
-            'phone_number' => $this->phone_number,
-            'address' => $this->address,
+           // 'phone_number' => $this->phone_number,
+           'status' => $this->status,
             'description' => $this->description,
             'price' => $this->price,
             'photo_path' => $photoPath,
@@ -56,8 +57,8 @@ class ServiceOffered extends Component
         $service = Service::findOrFail($id);
         $this->serviceId = $service->id;
         $this->service_name = $service->service_name;
-        $this->phone_number = $service->phone_number;
-        $this->address = $service->address;
+        // $this->phone_number = $service->phone_number;
+         $this->status = $service->status;
         $this->description = $service->description;
         $this->price = $service->price;
     }
@@ -71,8 +72,8 @@ class ServiceOffered extends Component
 
         $service->update([
             'service_name' => $this->service_name,
-            'phone_number' => $this->phone_number,
-            'address' => $this->address,
+            // 'phone_number' => $this->phone_number,
+            'status' => $this->status,
             'description' => $this->description,
             'price' => $this->price,
             'photo_path' => $photoPath,

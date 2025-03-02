@@ -34,7 +34,7 @@
                                 <img src="{{ asset('storage/' . $service->photo_path) }}" alt="{{ $service->service_name }}" class="w-24 h-24 object-cover rounded-md mr-4">
                                 <div>
                                     <h3 class="text-lg font-bold">{{ $service->service_name }}</h3>
-                                    <p class="text-gray-700">{{ $service->address }}</p>
+                                    {{-- <p class="text-gray-700">{{ $service->address }}</p> --}}
                                     <p class="text-xl font-semibold text-green-600">{{ number_format($service->price, 2) }} PHP</p>
                                 </div>
                             </li>

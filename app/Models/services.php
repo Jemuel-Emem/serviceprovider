@@ -17,7 +17,8 @@ class services extends Model
         'price',
         'photo_path',
         'gcashname',
-        'gcashnumber'
+        'gcashnumber',
+        'status'
     ];
 
 
