@@ -31,29 +31,74 @@ class Appointments extends Component
         ]);
     }
 
+    // public function approveAppointment($appointmentId)
+    // {
+    //     $appointment = Appointment::find($appointmentId);
+
+    //     if ($appointment) {
+    //         $appointment->status = 'completed';
+    //         $appointment->save();
+    //         $message = "Your appointment for {$appointment->servicename} on {$appointment->dateofappointment} has been APPROVED. Thank you!";
+    //     }
+    // }
+
+    // public function declineAppointment($appointmentId)
+    // {
+    //     $appointment = Appointment::find($appointmentId);
+
+    //     if ($appointment) {
+    //         $appointment->status = 'canceled';
+    //         $appointment->save();
+
+
+    //         $this->sendSMS($appointment->phonenumber, "We regret to inform you that your appointment for {$appointment->servicename} has been declined.");
+    //     }
+    // }
+
     public function approveAppointment($appointmentId)
     {
         $appointment = Appointment::find($appointmentId);
+        $serviceProvider = auth()->user();
 
         if ($appointment) {
             $appointment->status = 'completed';
             $appointment->save();
-            $message = "Your appointment for {$appointment->servicename} on {$appointment->dateofappointment} has been APPROVED. Thank you!";
+
+            $clientMessage = "Your appointment for {$appointment->servicename} on {$appointment->dateofappointment} has been APPROVED. Thank you!";
+            $providerMessage = "You have an approved appointment for {$appointment->servicename} with {$appointment->client_name} on {$appointment->dateofappointment}.";
+
+
+            $this->sendSMS($appointment->phonenumber, $clientMessage);
+
+
+            if ($serviceProvider->phonenumber) {
+                $this->sendSMS($serviceProvider->phonenumber, $providerMessage);
+            }
         }
     }
 
     public function declineAppointment($appointmentId)
     {
         $appointment = Appointment::find($appointmentId);
+        $serviceProvider = auth()->user();
 
         if ($appointment) {
             $appointment->status = 'canceled';
             $appointment->save();
 
+            $clientMessage = "We regret to inform you that your appointment for {$appointment->servicename} has been declined.";
+            $providerMessage = "You have declined an appointment for {$appointment->servicename} with {$appointment->client_name}.";
 
-            $this->sendSMS($appointment->phonenumber, "We regret to inform you that your appointment for {$appointment->servicename} has been declined.");
+
+            $this->sendSMS($appointment->phonenumber, $clientMessage);
+
+
+            if ($serviceProvider->phonenumber) {
+                $this->sendSMS($serviceProvider->phonenumber, $providerMessage);
+            }
         }
     }
+
 
     public function printReceipt($appointmentId)
     {
