@@ -28,7 +28,18 @@ class User extends Authenticatable
         'gcashnumber',
         'id_photo'
     ];
-
+    public function services()
+    {
+        return $this->hasMany(services::class, 'user_id');
+    }
+    public function appointments()
+    {
+        return $this->hasMany(appointment::class, 'serviceprovider_id');
+    }
+    public function receivedAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'serviceprovider_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

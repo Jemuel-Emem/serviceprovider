@@ -15,11 +15,21 @@ class Chat extends Component
     public $selectedServiceProvider;
     public $serviceProviders = []; // Store the list of service providers
 
+    // public function mount()
+    // {
+    //     $this->user = Auth::user();
+    //     $this->serviceProviders = User::where('role', 2)->get(); // Fetch service providers with role 2
+    // }
     public function mount()
     {
         $this->user = Auth::user();
-        $this->serviceProviders = User::where('role', 2)->get(); // Fetch service providers with role 2
+
+        // Get service providers where the client (user_id) has an appointment
+        $this->serviceProviders = User::whereHas('receivedAppointments', function ($query) {
+            $query->where('user_id', $this->user->id);
+        })->get();
     }
+
 
     public function selectServiceProvider($providerId)
     {

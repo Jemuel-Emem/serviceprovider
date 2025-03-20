@@ -19,6 +19,7 @@ class ServiceOffered extends Component
     public $description;
     public $price;
     public $status;
+    public $availability;
     public $serviceId;
 
     protected $rules = [
@@ -41,6 +42,7 @@ class ServiceOffered extends Component
             'service_name' => $this->service_name,
            // 'phone_number' => $this->phone_number,
            'status' => $this->status,
+           'availability' => $this->availability,
             'description' => $this->description,
             'price' => $this->price,
             'photo_path' => $photoPath,
@@ -59,6 +61,7 @@ class ServiceOffered extends Component
         $this->service_name = $service->service_name;
         // $this->phone_number = $service->phone_number;
          $this->status = $service->status;
+         $this->availability = $service->availability;
         $this->description = $service->description;
         $this->price = $service->price;
     }
@@ -74,6 +77,7 @@ class ServiceOffered extends Component
             'service_name' => $this->service_name,
             // 'phone_number' => $this->phone_number,
             'status' => $this->status,
+            'availability' => $this->availability,
             'description' => $this->description,
             'price' => $this->price,
             'photo_path' => $photoPath,

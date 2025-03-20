@@ -55,27 +55,55 @@ class Appointments extends Component
     //     }
     // }
 
+    // public function approveAppointment($appointmentId)
+    // {
+    //     $appointment = Appointment::find($appointmentId);
+    //     $serviceProvider = auth()->user();
+
+    //     if ($appointment) {
+    //         $appointment->status = 'completed';
+    //         $appointment->save();
+
+    //         $clientMessage = "Your appointment for {$appointment->servicename} on {$appointment->dateofappointment} has been APPROVED. Thank you!";
+    //         $providerMessage = "You have an approved appointment for {$appointment->servicename} with {$appointment->client_name} on {$appointment->dateofappointment}.";
+
+
+    //         $this->sendSMS($appointment->phonenumber, $clientMessage);
+
+
+    //         if ($serviceProvider->phonenumber) {
+    //             $this->sendSMS($serviceProvider->phonenumber, $providerMessage);
+    //         }
+    //     }
+    // }
+
+
     public function approveAppointment($appointmentId)
-    {
-        $appointment = Appointment::find($appointmentId);
-        $serviceProvider = auth()->user();
+{
+    $appointment = Appointment::find($appointmentId);
+    $serviceProvider = auth()->user();
 
-        if ($appointment) {
-            $appointment->status = 'completed';
-            $appointment->save();
+    if ($appointment) {
+        $appointment->status = 'completed';
+        $appointment->save();
 
-            $clientMessage = "Your appointment for {$appointment->servicename} on {$appointment->dateofappointment} has been APPROVED. Thank you!";
-            $providerMessage = "You have an approved appointment for {$appointment->servicename} with {$appointment->client_name} on {$appointment->dateofappointment}.";
+        // Update service status to 'unavailable'
+        $service = $serviceProvider->services()->where('service_name', $appointment->servicename)->first();
+        if ($service) {
+            $service->status = 'unavailable';
+            $service->save();
+        }
 
+        $clientMessage = "Your appointment for {$appointment->servicename} on {$appointment->dateofappointment} has been APPROVED. Thank you!";
+        $providerMessage = "You have an approved appointment for {$appointment->servicename} with {$appointment->client_name} on {$appointment->dateofappointment}.";
 
-            $this->sendSMS($appointment->phonenumber, $clientMessage);
+        $this->sendSMS($appointment->phonenumber, $clientMessage);
 
-
-            if ($serviceProvider->phonenumber) {
-                $this->sendSMS($serviceProvider->phonenumber, $providerMessage);
-            }
+        if ($serviceProvider->phonenumber) {
+            $this->sendSMS($serviceProvider->phonenumber, $providerMessage);
         }
     }
+}
 
     public function declineAppointment($appointmentId)
     {

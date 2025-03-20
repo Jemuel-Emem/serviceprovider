@@ -25,8 +25,15 @@
 
                     <div class="mt-2 text-indigo-600 font-bold flex justify-between">
                         <p class="text-gray-600">Php{{ number_format($service->price, 2) }}</p>
+                       <div class="">
+                        <span>
+                            <p class="text-gray-600">Availability</p>
+                            <p class="text-white bg-blue-700 rounded-full p w-32 text-center mb-4"> {{ $service->availability}}</p>
+                        </span>
                         <p class="text-green-600 bg-gray-300 rounded-full p w-32 text-center"> {{ $service->status}}</p>
+
                     </div>
+                       </div>
 
                     <p class="text-amber-400">
                         Ratings:
@@ -42,7 +49,14 @@
                     </p>
                     <!-- Appoint Button -->
                     <button wire:click="viewComments('{{ $service->service_name }}')" class="mt-4 bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 w-full">View Comments</button>
-                    <button wire:click="viewService({{ $service->id }})" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 w-full">Book Now</button>
+                    {{-- <button wire:click="viewService({{ $service->id }})" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 w-full">Book Now</button> --}}
+                    <button wire:click="viewService({{ $service->id }})"
+                        class="mt-4 px-4 py-2 rounded-md w-full
+                        {{ $service->status === 'unavailable' ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700 text-white' }}"
+                        {{ $service->status === 'unavailable' ? 'disabled' : '' }}>
+                        Book Now
+                    </button>
+
                 </div>
             @endforeach
         @endif

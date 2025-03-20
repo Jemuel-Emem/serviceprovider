@@ -32,8 +32,7 @@ class ServiceProvider extends Component
             $user->serviceproviderstatus = 'approved';
             $user->save();
 
-            // Send SMS notification
-            $message = "YOUR REGISTRATION HAS BEEN APPROVED. YOU CAN NOW ACCESS YOUR ACCOUNT.";
+            $message = "YOUR REGISTRATION HAS BEEN APPROVED. YOU ARE SUCCESSFULLY REGISTERED.";
             $this->sendSMS($user->phonenumber, $message);
         }
     }

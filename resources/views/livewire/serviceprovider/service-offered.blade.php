@@ -36,10 +36,21 @@
             <div class="col-span-1">
                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                 <select id="status" wire:model="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                    <option value="a">Select Status</option>
                     <option value="available">Available</option>
                     <option value="unavailable">Unavailable</option>
                 </select>
                 @error('status') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-span-1">
+                <label for="availability" class="block text-sm font-medium text-gray-700">Availability</label>
+                <select id="availability" wire:model="availability" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                    <option value="a">Select Availability</option>
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                </select>
+                @error('availability') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
         </div>
 
@@ -64,6 +75,7 @@
                         <th class="py-2 px-4 border-b text-left">Address</th> --}}
                         <th class="py-2 px-4 border-b text-left">Price</th>
                         <th class="py-2 px-4 border-b text-left">Description</th>
+                        <th class="py-2 px-4 border-b text-left">Availablity</th>
                         <th class="py-2 px-4 border-b text-left">Status</th>
                         <th class="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
@@ -79,6 +91,7 @@
                             <td class="py-2 px-4 border-b">{{ $service->address }}</td> --}}
                             <td class="py-2 px-4 border-b">Php{{ number_format($service->price, 2) }}</td>
                             <td class="py-2 px-4 border-b">{{ $service->description }}</td>
+                            <td class="py-2 px-4 border-b">{{ $service->availability }}</td>
                             <td class="py-2 px-4 border-b">{{ $service->status }}</td>
                             <td class="py-2 px-4 border-b">
                                 <button wire:click="editService({{ $service->id }})" class="text-blue-500 hover:text-blue-700">Edit</button>
